@@ -139,5 +139,32 @@ public class DivideVenceras {
             paresDer++;
         }
     }
+
+    /*
+    Dado un array de números enteros positivos y negativos, se desea
+    encontrar la suma máxima de cualquiera de sus subarrays1 formado sólo por
+    números positivos
+    */
+
+    public static int maxSubArrayPositivos(int[] array){
+        if(array != null && array.length != 0) {
+            return maxSubArrayPositivosAux(array, 0, array.length - 1);
+        }
+        else return -1;
+    }
+    public static int maxSubArrayPositivosAux(int[] array, int i0, int iN){
+        if(i0 == iN){
+            if(array[iN] > 0){
+                return array[iN];
+            }else return 0;
+        }
+        else{
+            int k = (i0+iN) / 2;
+            int maxIzq =maxSubArrayPositivosAux(array,i0,k);
+            int maxDer =maxSubArrayPositivosAux(array,k+1, iN);
+            int maxCentral = maxSubArrayCentral(array,i0,k,iN);
+            return Math.max(maxIzq,Math.max(maxDer,maxCentral));
+        }
+    }
 }
 
