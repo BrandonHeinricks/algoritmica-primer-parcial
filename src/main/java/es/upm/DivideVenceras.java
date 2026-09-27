@@ -4,9 +4,9 @@ import java.util.ArrayList;
 public class DivideVenceras {
     public static void main(String[] args) {
 
-
-
-
+        int[] arrayDesordenado = {-2, 12, 3, 4, -21, 8, 10, 5, -6, 1};
+        pares(arrayDesordenado);
+        System.out.println(Arrays.toString(arrayDesordenado));
     }
 
     //25JUNIO-2025
@@ -100,11 +100,12 @@ public class DivideVenceras {
     */
 
     public static void pares(int[] array) {
-        if(array != null || array.length != 0){
-            paresAux(array, 0, array.length);
+        if(array != null && array.length != 0){
+            paresAux(array, 0, array.length-1);
         }
     }
     public static void paresAux(int[] array, int i0, int iN){
+        if(i0 == iN){return;}
         if(i0+1 == iN) {
             if(array[iN]%2==0 && array[i0]%2 !=0){
                 int aux = array[i0];
@@ -116,15 +117,27 @@ public class DivideVenceras {
             int k = (i0 + iN) /2;
             paresAux(array, i0, k);
             paresAux(array, k+1, iN);
+            int paresIzq = contadorPares(array, i0, k);
+            int paresDer = contadorPares(array,k+1,iN);
+            sustituirXIndex(array,paresIzq, paresDer, k);
         }
     }
-
-
-
-
-
-
-
-
+    public static int contadorPares(int[] array, int inicio, int fin) {
+        int contador = 0;
+        for(int i=inicio; i<= fin; i++){
+            if(array[i] % 2 == 0) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+    public static void sustituirXIndex(int[] array, int paresIzq, int paresDer, int k){
+        for(int i = paresIzq; i <= k; i++){
+            int aux = array[i];
+            array[i] = array[paresDer];
+            array[paresDer] = aux;
+            paresDer++;
+        }
+    }
 }
 
