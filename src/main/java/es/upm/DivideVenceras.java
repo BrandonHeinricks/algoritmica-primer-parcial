@@ -166,5 +166,22 @@ public class DivideVenceras {
             return Math.max(maxIzq,Math.max(maxDer,maxCentral));
         }
     }
+    public static int maxSubArrayCentral(int[] array, int i0, int k , int iN){
+        int m = 0;
+        if(array[k] < 0){return 0;
+        }else {
+            int i = k;
+            while (i>i0 && array[i] > 0) {
+                m = m+array[i];
+                i--;
+            }
+            i = k+1;
+            while(i< iN && array[i]>0){
+                m = m+array[i];
+                i++;
+            }
+        }
+        return m;
+    }
 }
 
