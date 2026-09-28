@@ -214,4 +214,41 @@ public class DivideVenceras {
             }
         }
     }
+
+
+    /*
+    Sea un vector de N elementos enteros positivos y ordenados empezando
+    siempre por un elemento par. El vector tiene los elementos colocados siguiendo la
+    secuencia par-impar-par-impar-..., excepto por un único elemento que se salta la
+    secuencia y que nunca será el primero del vector.
+
+    Diseñar el algoritmo basado en Divide y Vencerás con complejidad en el caso
+    peor1 de O(log N) (donde N es el tamaño del vector) que devuelva un número
+    entero que corresponde a la posición del elemento que se salta la secuencia.
+     */
+
+
+    public static int parImpar(int[] array){
+        return parImparAux(array, 0, array.length-1);
+    }
+    public static int parImparAux(int[] array, int i0, int iN){
+         if(i0 == iN){
+             return i0;
+         }else{
+             int k = (i0+iN) / 2;
+             if(esPar(k) && esPar(array[k]) || !esPar(k) && !esPar(array[k])){
+                 return parImparAux(array, k+1,iN);
+             } else{
+                 return parImparAux(array, i0,k);
+             }
+         }
+    }
+    public static boolean esPar(int n){
+        return n%2 ==0;
+    }
+
+
+
+
+
 }
