@@ -183,5 +183,35 @@ public class DivideVenceras {
         }
         return m;
     }
-}
 
+    /*
+    Decimos que un array, v, de N enteros está polarizado si todos sus
+    elementos son distintos de 0, todos los elementos negativos ocupan posiciones
+    consecutivas bajas del vector y todos los elementos positivos ocupan posiciones
+    consecutivas altas del vector.
+
+    Diseñar un algoritmo basado en Divide y Vencerás con complejidad en el caso
+    peor1 de O(log N) (donde N es el tamaño del vector) que, dado un vector polarizado,
+    devuelva la posición más baja que ocupa un elemento positivo
+     */
+
+    public static int primerPositivoPolarizado(int[] vector){
+        if(vector[0] >0){return 0;}
+        else if(vector[vector.length-1] < 0){return -1;} // no hay positivos en TODO el array
+        return primerPositivoPolarizadoAux(vector, 0, vector.length -1);
+    }
+
+    public static int primerPositivoPolarizadoAux(int[] array, int i0, int iN) {
+        if(i0 == iN){
+            if(array[i0] > 0){return i0;}
+            else{return -1;}
+        } else{
+            int k = (i0 +iN) / 2;
+            if(array[k]<0) {
+                return primerPositivoPolarizadoAux(array, k + 1, iN);
+            }else {
+                return primerPositivoPolarizadoAux(array, i0, k);
+            }
+        }
+    }
+}
