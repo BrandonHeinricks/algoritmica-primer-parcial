@@ -247,8 +247,42 @@ public class DivideVenceras {
         return n%2 ==0;
     }
 
+    /*
+    Dado un array de números enteros, encontrar la longitud del
+    subarray1 ordenado más largo
+
+    Diseñar un algoritmo basado en Divide y Vencerás2 con complejidad O(N·log N)
+    en el caso peor3 (donde N es el tamaño del array) que devuelva la longitud del
+    subarray pedido.
+     */
 
 
+    public static int longMaxSubarrayOrdenado(int[] array){
 
+        return longMaxSubarrayOrdenadoAux(array, 0, array.length-1);
+    }
+    public static int longMaxSubarrayOrdenadoAux(int[] array, int i0, int iN){
+        if(i0 == iN){
+            return array[i0];
+        }else{
+            int k = (i0+ iN)/2;
+            int izq = longMaxSubarrayOrdenadoAux(array,i0, k );
+            int der = longMaxSubarrayOrdenadoAux(array,k+1,iN);
+            int med = longMaxSubarrayOrdenadoJuntos(array,i0, iN, k);
+            return Math.max(med, Math.max(izq,der));
+        }
 
+    }
+
+    public static int longMaxSubarrayOrdenadoJuntos(int[] array, int i0 ,int iN, int k){
+        int i = i0+1;
+        while(i<iN && array[i0]>= array[i0+1]){
+            i++;
+        }
+        int j = k+1;
+        while(j<iN && array[j]< array[j+1]){
+            j++;
+        }
+        return i+j;
+    }
 }
