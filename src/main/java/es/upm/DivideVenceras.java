@@ -258,12 +258,14 @@ public class DivideVenceras {
 
 
     public static int longMaxSubarrayOrdenado(int[] array){
-
-        return longMaxSubarrayOrdenadoAux(array, 0, array.length-1);
+        if(array != null && array.length != 0) {
+            return longMaxSubarrayOrdenadoAux(array, 0, array.length - 1);
+        }
+        else return 0;
     }
     public static int longMaxSubarrayOrdenadoAux(int[] array, int i0, int iN){
         if(i0 == iN){
-            return array[i0];
+            return i0;
         }else{
             int k = (i0+ iN)/2;
             int izq = longMaxSubarrayOrdenadoAux(array,i0, k );
@@ -273,16 +275,25 @@ public class DivideVenceras {
         }
 
     }
-
     public static int longMaxSubarrayOrdenadoJuntos(int[] array, int i0 ,int iN, int k){
-        int i = i0+1;
-        while(i<iN && array[i0]>= array[i0+1]){
+        // si esto no esta ordenado no existe ningun caso de subArray en el medio q sea mayor a las mitades
+        if (array[k] > array[k + 1]) {
+            return 0;
+        }
+
+        int i = i0;
+        while(i<iN && array[i0] >= array[i0+1]){
             i++;
         }
         int j = k+1;
-        while(j<iN && array[j]< array[j+1]){
+        while(j<iN && array[j] <= array[j+1]){
             j++;
         }
         return i+j;
     }
+
+
+
+
+    
 }
