@@ -292,8 +292,36 @@ public class DivideVenceras {
         return i+j;
     }
 
+    /*
+    Sean A y B dos vectores de N elementos enteros, ordenados circularmente
+    y que pueden contener números repetidos. Ambos vectores comparten exactamente
+    los mismos elementos hasta una posición determinada ‘k’, a partir de la cual todos
+    sus elementos serán diferentes. Se pide implementar un algoritmo, que dado los
+    vectores A y B determine esa posición ‘k’. En el caso de que los dos vectores sean
+    idénticos el procedimiento devolverá -1 (indicando de esa forma que tal posición no
+    existe).
 
+    Diseñar el procedimiento basado en Divide y Vencerás con complejidad O(log
+    N) en el caso peor1 (donde N es el tamaño del vector) que devuelva un número
+    entero que corresponde a la posición del primer elemento diferente entre
+    ambos vectores
+     */
+    public static int posDiferente (int[] vector1, int[] vector2){
+        if(vector1 != null && vector2 != null && vector1.length !=0 && vector2.length !=0){
+            return posDiferenteAux(vector1, vector2, 0, vector1.length-1);}
+        else return -1;
+    }
+    public static int posDiferenteAux(int[] array1, int[] array2, int i0, int iN){
+        if(i0 == iN){
+            return i0;
+        }
+        else{
+            int k = (i0 + iN)/2;
+            if(array1[k] == array2[k]){
+                return posDiferenteAux(array1, array2, k+1, iN);
+            }
+            return posDiferenteAux(array1, array2, i0, k);
+        }
+    }
 
-
-    
 }
