@@ -324,4 +324,41 @@ public class DivideVenceras {
         }
     }
 
+
+
+    /*
+    Se dice que un array, v, es de tipo colina si existe un índice n tal que:
+    para todo i<n se cumple que v[i]<v[i+1]; y para todo i>n se cumple que v[i-1]>v[i].
+    Dado un array de tipo colina, queremos encontrar su máximo.
+
+    Diseñar un algoritmo basado en Divide y Vencerás con complejidad O(log N) en el
+    caso peor1 (donde N es el tamaño del vector) que devuelva el máximo de un array
+    de tipo colina.
+     */
+
+    public static int maxArrayColina(int[] array){
+        if(array != null && array.length != 0) {
+            return maxArrayColinaAux(array, 0, array.length - 1);
+        }
+        else return -1;
+    }
+    public static int maxArrayColinaAux(int[] array, int i0, int iN){
+        if(i0 == iN){
+            return array[i0];
+        }// segundo caso ase ESTRICTAMENTE necesario para evitar IndexOutOfBoundsException cuando se quiera hacer array[k-1]
+        else if(i0 == iN+1){
+            return Math.max(array[i0], array[iN]);
+        }
+        else{
+            int k = (i0 +iN) / 2;
+            if(array[k] < array[k+1]){
+                return maxArrayColinaAux(array, k+1, iN);
+            }// en este instante se agotan la llamadas recursivas donde k > k+1
+            else if(array[k-1] < array[k]){
+                return array[k];
+            } else{
+                return maxArrayColinaAux(array, i0, k);
+            }
+        }
+    }
 }
