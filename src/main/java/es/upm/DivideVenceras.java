@@ -396,5 +396,40 @@ public class DivideVenceras {
 
 
 
+    /*
+    usando D&C , retornar el numero de tamaño del subaarray mas largo de unos en un array de elmentos binarios
+     */
+
+    public static int cadenaUnos(int[] array){
+        return cadenaUnosAux(array, 0, array.length-1);
+    }
+    public static int cadenaUnosAux(int[] array, int i0, int iN){
+        if(i0 == iN){
+            return i0;
+        }else {
+            int k = (i0 +iN) / 2;
+            int der = cadenaUnosAux(array,k+1, iN);
+            int izq = cadenaUnosAux(array, i0, k);
+            int mid = cadenaUnosMid(array, i0, iN, k);
+            return Math.max(mid, Math.max(der,izq));
+        }
+    }
+    public static int cadenaUnosMid(int[] array, int i0, int iN, int k){
+        if(array[k] == 1){
+            int n = 0;
+            int i = k;
+            while(i>iN && array[i] == 1 ){
+                n++;
+                i--;
+            }
+            int j = k;
+            while(j<iN && array[j] == 1){
+                n++;
+                j ++;
+            }
+            return n;
+        }else{return -1;}
+    }
+
 
 }
