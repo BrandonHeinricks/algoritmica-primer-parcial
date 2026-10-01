@@ -361,4 +361,40 @@ public class DivideVenceras {
             }
         }
     }
+
+    /*
+    considerando tener como entrada un array de elementos doblemente repetidos: [1,1,4,4,5,8,8,12,12] --> 5
+     */
+
+    public static int buscarNoDoble(int[] array){
+        return buscarNoDobleAux(array, 0, array.length-1);
+    }
+    public static int buscarNoDobleAux(int[] array, int i0, int iN){
+        if(i0 == iN){
+            return i0;
+        }else{
+            int k = (i0+iN)/2;
+            if (array[k] == array[k-1]) {
+                if ((iN - (k + 1) + 1) % 2 == 0) {
+                    return buscarNoDobleAux(array, i0, k - 2);
+                }else{
+                    return buscarNoDobleAux(array, k+1, iN);
+                }
+            }else if(array[k] == array[k+1]){
+                if((k-1-i0+1)%2 == 0){
+                    return buscarNoDobleAux(array,k+2,iN);
+                }else{
+                    return buscarNoDobleAux(array,i0,k-1);
+                }
+            }else{
+                return array[k];
+            }
+        }
+    }
+
+
+
+
+
+
 }
