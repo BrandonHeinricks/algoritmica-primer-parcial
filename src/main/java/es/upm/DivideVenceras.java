@@ -405,7 +405,7 @@ public class DivideVenceras {
     }
     public static int cadenaUnosAux(int[] array, int i0, int iN){
         if(i0 == iN){
-            return i0;
+            return array[i0];
         }else {
             int k = (i0 +iN) / 2;
             int der = cadenaUnosAux(array,k+1, iN);
@@ -416,15 +416,15 @@ public class DivideVenceras {
     }
     public static int cadenaUnosMid(int[] array, int i0, int iN, int k){
         if(array[k] == 1){
-            int n = 0;
-            int i = k;
-            while(i>iN && array[i] == 1 ){
+            int n = 1;
+            int i = k-1;
+            while(i>=i0 && array[i] == 1 ){
                 n++;
                 i--;
             }
-            int j = k;
-            while(j<iN && array[j] == 1){
-                n++;
+            int j = k+1;
+            while(j<=iN && array[j] == 1){
+                n ++;
                 j ++;
             }
             return n;
