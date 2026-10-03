@@ -92,54 +92,6 @@ public class DivideVenceras {
     }
 
 
-    /*Dado un array de números enteros se quiere reordenar para que
-    todos los números pares queden a la izquierda.
-    Implementar un algoritmo en Java, basado en el esquema de Divide y
-    Vencerás con complejidad en el peor caso O(NlogN)1 que ofrezca esta funcionalidad sin
-    usar estructuras auxiliares del tamaño de array.
-    */
-
-    public static void pares(int[] array) {
-        if(array != null && array.length != 0){
-            paresAux(array, 0, array.length-1);
-        }
-    }
-    public static void paresAux(int[] array, int i0, int iN){
-        if(i0 == iN){return;}
-        if(i0+1 == iN) {
-            if(array[iN]%2==0 && array[i0]%2 !=0){
-                int aux = array[i0];
-                array[i0]= array[iN];
-                array[iN]= aux;
-            }
-        }
-        else{
-            int k = (i0 + iN) /2;
-            paresAux(array, i0, k);
-            paresAux(array, k+1, iN);
-            int paresIzq = contadorPares(array, i0, k);
-            int paresDer = contadorPares(array,k+1,iN);
-            sustituirXIndex(array,paresIzq, paresDer, k);
-        }
-    }
-    public static int contadorPares(int[] array, int inicio, int fin) {
-        int contador = 0;
-        for(int i=inicio; i<= fin; i++){
-            if(array[i] % 2 == 0) {
-                contador++;
-            }
-        }
-        return contador;
-    }
-    public static void sustituirXIndex(int[] array, int paresIzq, int paresDer, int k){
-        for(int i = paresIzq; i <= k; i++){
-            int aux = array[i];
-            array[i] = array[paresDer];
-            array[paresDer] = aux;
-            paresDer++;
-        }
-    }
-
     /*
     Dado un array de números enteros positivos y negativos, se desea
     encontrar la suma máxima de cualquiera de sus subarrays1 formado sólo por
@@ -392,10 +344,6 @@ public class DivideVenceras {
         }
     }
 
-
-
-
-
     /*
     usando D&C , retornar el numero de tamaño del subaarray mas largo de unos en un array de elmentos binarios
      */
@@ -430,6 +378,56 @@ public class DivideVenceras {
             return n;
         }else{return -1;}
     }
+
+
+      /*Dado un array de números enteros se quiere reordenar para que
+    todos los números pares queden a la izquierda.
+    Implementar un algoritmo en Java, basado en el esquema de Divide y
+    Vencerás con complejidad en el peor caso O(NlogN)1 que ofrezca esta funcionalidad sin
+    usar estructuras auxiliares del tamaño de array.
+    */
+
+    public static void pares(int[] array) {
+        if(array != null && array.length != 0){
+            paresAux(array, 0, array.length-1);
+        }
+    }
+    public static void paresAux(int[] array, int i0, int iN){
+        if(i0 == iN){return;}
+        if(i0+1 == iN) {
+            if(array[iN]%2==0 && array[i0]%2 !=0){
+                int aux = array[i0];
+                array[i0]= array[iN];
+                array[iN]= aux;
+            }
+        }
+        else{
+            int k = (i0 + iN) /2;
+            paresAux(array, i0, k);
+            paresAux(array, k+1, iN);
+            int paresIzq = contadorPares(array, i0, k);
+            int paresDer = contadorPares(array,k+1,iN);
+            sustituirXIndex(array,paresIzq, paresDer, k);
+        }
+    }
+    public static int contadorPares(int[] array, int inicio, int fin) {
+        int contador = 0;
+        for(int i=inicio; i<= fin; i++){
+            if(array[i] % 2 == 0) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+    public static void sustituirXIndex(int[] array, int paresIzq, int paresDer, int k){
+        for(int i = paresIzq; i <= k; i++){
+            int aux = array[i];
+            array[i] = array[paresDer];
+            array[paresDer] = aux;
+            paresDer++;
+        }
+    }
+
 
 
 }
