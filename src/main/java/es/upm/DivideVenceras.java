@@ -439,24 +439,23 @@ public class DivideVenceras {
             int k = (i0+iN)/2;
             paresAux(array,i0, k);
             paresAux(array, k+1, iN);
-            ordenarParejas(array, i0, k, iN);
+            merge(array, i0, k, iN);
         }
     }
 
-    public static void ordenarParejas(int[] array, int i0, int k, int iN) {
-        int indexInicioImparesIzq = k+1;
-        while (indexInicioImparesIzq >= i0 && !esPar(array[indexInicioImparesIzq])) {
-            indexInicioImparesIzq--;
-        }
-        int indexInicioImparesDer = k-1;
-        while(indexInicioImparesDer >= iN && esPar(array[indexInicioImparesDer])){
-            indexInicioImparesDer++;
-        }
-        while(indexInicioImparesIzq <= k && indexInicioImparesDer>= k){
-            int aux = array[indexInicioImparesIzq];
-            array[indexInicioImparesIzq] = array[indexInicioImparesDer];
-            array[indexInicioImparesDer] = aux;
-            indexInicioImparesIzq ++; indexInicioImparesDer--;
+    public static void merge(int[] array, int i0, int k, int iN) {
+        int l=i0;
+        int r=iN;
+        // posicionamos l en el primer elemento impar de la mitad izquierda
+        while ((l<=k) && (array[l]%2==0)) l++;
+        // posicionamos r en el último elemento par de la mitad derecha
+        while ((r>k) && (array[r]%2!=0)) r--;
+        // mientras haya elementos en la mitad izquierda (que nos hemos asegurado de quesean impares) y en la mitad derecha (que nos hemos asegurado de que sean pares), los vamos intercambiando, incrementamos l y decrementamos r.
+        while ((l<=k) && (r>k)){
+            int aux= array[l];
+            array[l]=array[r];
+            array[r]=aux;
+            l++; r--;
         }
     }
 }
