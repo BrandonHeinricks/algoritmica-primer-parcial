@@ -387,6 +387,7 @@ public class DivideVenceras {
     usar estructuras auxiliares del tamaño de array.
     */
 
+    /*
     public static void pares(int[] array) {
         if(array != null && array.length != 0){
             paresAux(array, 0, array.length-1);
@@ -427,7 +428,35 @@ public class DivideVenceras {
             paresDer++;
         }
     }
+    */
 
+    public static void pares(int[] array){
+        paresAux(array, 0, array.length-1);
+    }
+    public static void paresAux(int [] array, int i0, int iN){
+        if(i0 == iN){return;
+        }else{
+            int k = (i0+iN)/2;
+            paresAux(array,i0, k);
+            paresAux(array, k+1, iN);
+            ordenarParejas(array, i0, k, iN);
+        }
+    }
 
-
+    public static void ordenarParejas(int[] array, int i0, int k, int iN) {
+        int indexInicioImparesIzq = k+1;
+        while (indexInicioImparesIzq >= i0 && !esPar(array[indexInicioImparesIzq])) {
+            indexInicioImparesIzq--;
+        }
+        int indexInicioImparesDer = k-1;
+        while(indexInicioImparesDer >= iN && esPar(array[indexInicioImparesDer])){
+            indexInicioImparesDer++;
+        }
+        while(indexInicioImparesIzq <= k && indexInicioImparesDer>= k){
+            int aux = array[indexInicioImparesIzq];
+            array[indexInicioImparesIzq] = array[indexInicioImparesDer];
+            array[indexInicioImparesDer] = aux;
+            indexInicioImparesIzq ++; indexInicioImparesDer--;
+        }
+    }
 }
