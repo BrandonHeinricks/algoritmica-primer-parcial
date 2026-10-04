@@ -460,6 +460,41 @@ public class DivideVenceras {
     }
 
 
+    /*
+    2019-NOVIEMBRE
+    Decimos que un array, v, de N enteros está ordenado circularmente si, o
+    bien el vector está ordenado, o bien v[N-1] ≤ v[0] y $k con 0<k<N tal que "i≠k v[i] ≤
+    v[i+1] (esto es, está ordenado imaginando que fuera un array circular).
+    Sea un array ordenado circularmente en el que todos los números se encuentran
+    repetidos 2 veces salvo uno que aparece solo una vez. Se desea encontrar el elemento
+    que aparece sólo una vez.
+
+    Diseñar un algoritmo basado en Divide y Vencerás con complejidad O(log N) en el
+    caso peor1 (donde N es el tamaño del vector) que devuelva el elemento que aparece
+    una sola vez.
+     */
 
 
+    public static int elementoEspecial(int[] vector){
+        if (vector.length==1) return vector[0];
+        else {
+            int i0, iN;
+            if (vector[0] == vector[vector.length-1]) { i0 = 1; iN = vector.length-2; }
+            else { i0 = 0; iN = vector.length - 1; }
+            return elementoEspecialAux(vector,i0,iN);
+        }
+    }
+    public static int elementoEspecialAux(int[] vector, int i0, int iN) {
+        if (i0 == iN) return vector[i0];
+        else {
+            int k = (i0 + iN) / 2;
+            if (vector[k] == vector[k + 1]) {
+                if ((k - 1 - i0 + 1) % 2 == 1) return elementoEspecialAux(vector, i0, k - 1);
+                else return elementoEspecialAux(vector, k + 2, iN);
+            } else if (vector[k - 1] == vector[k]) {
+                if ((k - 2 - i0 + 1) % 2 == 1) return elementoEspecialAux(vector, i0, k - 2);
+                else return elementoEspecialAux(vector, k + 1, iN);
+            } else return vector[k];
+        }
+    }
 }
