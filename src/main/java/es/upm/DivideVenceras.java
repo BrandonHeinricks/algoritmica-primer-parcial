@@ -491,10 +491,16 @@ public class DivideVenceras {
             if (vector[k] == vector[k + 1]) {
                 if ((k - 1 - i0 + 1) % 2 == 1) return elementoEspecialAux(vector, i0, k - 1);
                 else return elementoEspecialAux(vector, k + 2, iN);
-            } else if (vector[k - 1] == vector[k]) {
+            } else if (vector[k - 1] == vector[k]) {    
                 if ((k - 2 - i0 + 1) % 2 == 1) return elementoEspecialAux(vector, i0, k - 2);
                 else return elementoEspecialAux(vector, k + 1, iN);
             } else return vector[k];
         }
     }
+
+
+
+
+
+
 }
