@@ -499,8 +499,38 @@ public class DivideVenceras {
     }
 
 
+    /*
+    5-NOVIEMBRE-2018
+    Rotar un array consiste en mover los elementos del array en k unidades a la
+    derecha (imaginando el array como si fuera circular).
+    Deseamos encontrar el valor mínimo de un array sabiendo que estaba ordenado
+    y que se ha rotado k unidades (desconociendo el valor de k). En el ejemplo
+    anterior, se devolvería 1.
+    Diseñar e implementar un algoritmo en Java basado en Divide y Vencerás
+    con complejidad O(log N) en el caso peor1 (donde N es el tamaño del vector),
+    que devuelva el valor mínimo de un array ordenado y rotado k unidades
+    (desconociendo el valor de k), teniendo en cuenta que no hay números
+    repetidos.
+     */
 
-
-
-
+    public static int minArrayRotado(int[] array){
+        return minArrayRotadoAux(array, 0, array.length-1, array[array.length-1]);
+    }
+    public static int minArrayRotadoAux(int[] array, int i0, int iN, int ultimo){
+        if(i0 == iN){return array[i0];
+        }else{
+            int k = (i0 + iN)/2;
+            if(array[k] > ultimo) {
+                if (array[k] <= array[k + 1]) {
+                    return minArrayRotadoAux(array, k + 1, iN, ultimo);
+                } else {
+                    return array[k + 1];
+                }
+            }else{
+                if(k> i0 && array[k] > array[k-1]){
+                    return minArrayRotadoAux(array, i0, k, ultimo);
+                }else{return array[k];}
+            }
+        }
+    }
 }
