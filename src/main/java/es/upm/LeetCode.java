@@ -68,5 +68,23 @@ public class LeetCode {
         }
         return maxIzq + maxDer;
     }
+
+
+    //153. Find Minimum in Rotated Sorted Array
+    public int findMin(int[] nums) {
+        return findMinAux(nums, 0, nums.length-1);
+    }
+    public int findMinAux(int[] array, int i0, int iN){
+        if(i0 == iN){return array[i0];
+        }else{
+            int k = (i0+iN)/2;
+            if(array[k] < array[k+1]){
+                return findMinAux(array, i0, k);
+            }else if(array[k] > array[k+1]){
+                return array[k+1];
+            }else{return findMinAux(array,k+1,iN);}
+        }
+    }
+
 }
 
