@@ -78,11 +78,11 @@ public class LeetCode {
         if(i0 == iN){return array[i0];
         }else{
             int k = (i0+iN)/2;
-            if(array[k] < array[k+1]){
-                return findMinAux(array, i0, k);
-            }else if(array[k] > array[k+1]){
-                return array[k+1];
-            }else{return findMinAux(array,k+1,iN);}
+            if(array[k] < array[iN]){
+                return findMinAux(array,i0 ,k );
+            }else{
+                return findMinAux(array,k+1 ,iN );
+            }
         }
     }
 
