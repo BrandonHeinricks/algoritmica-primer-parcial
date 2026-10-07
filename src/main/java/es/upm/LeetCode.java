@@ -114,5 +114,36 @@ public class LeetCode {
             }
         }
     }
+
+    //1752. Check if Array Is Sorted and Rotated
+
+    public boolean check(int[] nums) {
+        int numRoturas = checkRoturas(nums,0,nums.length-1);
+        if(numRoturas > 1){
+            return false;
+        } else if(numRoturas == 1 && nums[0]<nums[nums.length-1]){
+            return false;
+        }else{return true;}
+    }
+    public int checkRoturas(int[] nums, int i0, int iN){
+        if(i0 == iN){
+            return 0;
+        }else if(i0+1 == iN && nums[i0]>nums[iN]){
+            return 1;
+        }else{
+            int k = (i0+ iN)/2;
+            int izq = checkRoturas(nums,i0,k);
+            int der = checkRoturas(nums,k+1,iN);
+            int mid = checkRoturasMid(nums,i0, k, iN);
+            return izq + der + mid;
+        }
+    }
+    public int checkRoturasMid(int[] nums, int i0, int k, int iN){
+        if(nums[k] > nums[k+1]){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 }
 
