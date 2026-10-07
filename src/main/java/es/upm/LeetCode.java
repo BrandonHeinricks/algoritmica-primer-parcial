@@ -145,5 +145,24 @@ public class LeetCode {
             return 0;
         }
     }
+
+
+    //852. Peak Index in a Mountain Array
+
+    public int peakIndexInMountainArray(int[] arr) {
+        return peakIndexInMountainAux(arr,0, arr.length-1);
+    }
+    public int peakIndexInMountainAux(int[] array, int i0, int iN){
+        if(i0 == iN){
+            return i0;
+        }else{
+            int k = (i0+iN)/2;
+            if(array[k] < array[k+1]){
+                return peakIndexInMountainAux(array,k+1,iN);
+            }else{
+                return peakIndexInMountainAux(array, i0, k);
+            }
+        }
+    }
 }
 
