@@ -86,5 +86,33 @@ public class LeetCode {
         }
     }
 
+
+    //540. Single Element in a Sorted Array
+
+    public int singleNonDuplicate(int[] nums) {
+        if(nums.length > 2){
+            return singleNonDuplicateAux(nums, 0, nums.length-1);
+        }else{return nums[0];}
+    }
+    public int singleNonDuplicateAux(int[] nums, int i0, int iN){
+        if(i0 == iN){
+            return nums[i0];
+        }else{
+            int k = (i0 + iN)/2;
+            if(k%2 == 0){
+                if(nums[k] == nums[k+1]){
+                    return singleNonDuplicateAux(nums,k+1,iN);
+                }else{
+                    return singleNonDuplicateAux(nums,i0,k);
+                }
+            }else{
+                if(nums[k] == nums[k-1]){
+                    return singleNonDuplicateAux(nums,k+1,iN);
+                }else{
+                    return singleNonDuplicateAux(nums,i0, k);
+                }
+            }
+        }
+    }
 }
 
