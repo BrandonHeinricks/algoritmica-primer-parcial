@@ -164,5 +164,23 @@ public class LeetCode {
             }
         }
     }
+
+   //162. FindPeakElement
+
+    public int findPeakElement(int[] nums) {
+        return findPeakElementAux(nums, 0, nums.length-1);
+    }
+    public int findPeakElementAux(int[] nums, int i0, int iN){
+        if(i0 == iN){
+            return i0;
+        }else{
+            int k = (i0+iN)/2;
+            int der = findPeakElementAux(nums,k+1, iN);
+            int izq = findPeakElementAux(nums, i0, k);
+            return (nums[izq] >= nums[der]) ? izq : der;
+        }
+    }
+
+
 }
 
