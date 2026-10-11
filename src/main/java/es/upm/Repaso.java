@@ -126,46 +126,38 @@ public class Repaso {
     */
 
 
-    public int elementoMayoritario(int[] array){
-        return elementoMayoritarioAux(array,0, array.length-1);
+    public int elementoMayoritario(int[] array) {
+        return elementoMayoritarioAux(array, 0, array.length - 1);
     }
-    public int elementoMayoritarioAux(int[] array, int i0, int iN){
-        if(i0 == iN){
+
+    public int elementoMayoritarioAux(int[] array, int i0, int iN) {
+        if (i0 == iN) {
             return array[i0];
-        }else{
-            int k = (i0+iN)/2;
-            int izq = elementoMayoritarioAux(array,i0,k);
-            int der = elementoMayoritarioAux(array,k+1,iN);
-            int mid = elementoMayoritarioMid(array,i0,k,iN);
-            return Math.max(izq,Math.max(der,mid));
         }
+
+        int k = (i0 + iN) / 2;
+        int izq = elementoMayoritarioAux(array, i0, k);
+        int der = elementoMayoritarioAux(array, k + 1, iN);
+
+        if (izq == der) {
+            return izq;
+        }
+
+        int aparicionesIzq = contarApariciones(array, izq, i0, iN);
+        int aparicionesDer = contarApariciones(array, der, i0, iN);
+
+        return aparicionesIzq > aparicionesDer ? izq : der;
     }
-    public int elementoMayoritarioMid(int[] array, int i0, int k, int iN){
-        int maxApariciones = 0;
-        int i = i0;
-        while(i <= k && maxApariciones < (i0+iN/2){
-            int j = i0;
-            int num = array[i];
-            while(array[j] == num && j<= iN){
-                maxApariciones++;
-                j++;
+
+    private int contarApariciones(int[] array, int num, int i0, int iN) {
+        int contador = 0;
+        for (int i = i0; i <= iN; i++) {
+            if (array[i] == num) {
+                contador++;
             }
         }
-        return i;
+        return contador;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
